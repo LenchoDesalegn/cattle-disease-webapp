@@ -1,7 +1,8 @@
-streamlit==1.29.0
-tflite-runtime==2.20.0
-Pillow==10.1.0
-numpy==1.26.0
+streamlit
+tflite-runtime
+Pillow
+numpy
+
 
 
 
