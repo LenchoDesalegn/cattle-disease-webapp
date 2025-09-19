@@ -6,7 +6,7 @@ from tensorflow.keras.applications import MobileNetV2   # <-- ADD THIS
 
 # Load Keras model
 model = tf.keras.models.load_model(
-    'cattle_disease_model.h5',
+    'cattle_disease_webapp/cattle_disease_model.h5',
     custom_objects={
         'Functional': tf.keras.Model,       # required for functional API models
         'MobileNetV2': MobileNetV2          # pretrained layer used
@@ -48,6 +48,7 @@ if img:
     # Show results
     st.success(f"Prediction: {prediction}")
     st.info(f"First Aid Suggestion: {suggestion}")
+
 
 
 
