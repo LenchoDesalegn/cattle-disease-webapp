@@ -4,12 +4,13 @@ import numpy as np
 import tensorflow as tf
 
 # Load Keras model
-model = tf.keras.models.load_model('cattle_disease_webapp/cattle_disease_model.h5')
-custom_objects={
+model = tf.keras.models.load_model(
+    'cattle_disease_model.h5',
+    custom_objects={
         'Functional': tf.keras.Model,       # required for functional API models
         'MobileNetV2': MobileNetV2          # pretrained layer used
     }
-
+)
 class_names = ['Normal Skin', 'Lumpy Skin']
 first_aid = {
     "Normal Skin": "No action needed. Continue regular checkups and vaccination schedule.",
@@ -46,5 +47,6 @@ if img:
     # Show results
     st.success(f"Prediction: {prediction}")
     st.info(f"First Aid Suggestion: {suggestion}")
+
 
 
