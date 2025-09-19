@@ -4,7 +4,7 @@ import numpy as np
 import tensorflow as tf
 
 # Load Keras model
-model = tf.keras.models.load_model('cattle_disease_model.h5')
+model = tf.keras.models.load_model('cattle_disease_webapp/cattle_disease_model.h5')
 
 class_names = ['Normal Skin', 'Lumpy Skin']
 first_aid = {
@@ -42,3 +42,4 @@ if img:
     # Show results
     st.success(f"Prediction: {prediction}")
     st.info(f"First Aid Suggestion: {suggestion}")
+
