@@ -2,10 +2,22 @@ import streamlit as st
 from PIL import Image
 import numpy as np
 import tensorflow as tf
+from tensorflow.keras.applications import MobileNetV2
 
-# Load Keras model
-model = tf.keras.models.load_model('cattle_disease_model.h5')
+# Load Keras model with custom_objects for MobileNetV2
+@st.cache_resource  # caches the model for faster reloads
+def load_model():
+    return tf.keras.models.load_model(
+        'cattle_disease_model.h5',
+        custom_objects={
+            'Functional': tf.keras.Model,
+            'MobileNetV2': MobileNetV2
+        }
+    )
 
+model = load_model()
+
+# Class names and first aid suggestions
 class_names = ['Normal Skin', 'Lumpy Skin']
 first_aid = {
     "Normal Skin": "No action needed. Continue regular checkups and vaccination schedule.",
@@ -20,6 +32,7 @@ uploaded_file = st.file_uploader("Upload a cattle skin image", type=["jpg","jpeg
 # Capture from webcam
 capture_file = st.camera_input("Or capture image from webcam")
 
+# Process selected image
 img = None
 if uploaded_file:
     img = Image.open(uploaded_file)
